@@ -6,5 +6,8 @@
             "App\\": "app/"
         }
     },
-    "require": {}
+    "require": {
+        "twig/twig": "^3.4",
+        "nikic/fast-route": "^1.3"
+    }
 }

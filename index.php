@@ -8,6 +8,9 @@ require_once "vendor/autoload.php";
 
 session_start();
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $route) {
     $route->addRoute('GET', '/', [HomeController::class, 'index']);
     $route->addRoute('GET', '/register', [RegisterController::class, 'showRegistrationForm']);

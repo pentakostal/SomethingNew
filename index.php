@@ -14,6 +14,7 @@ $dotenv->load();
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $route) {
     $route->addRoute('GET', '/', [HomeController::class, 'index']);
     $route->addRoute('GET', '/register', [RegisterController::class, 'showRegistrationForm']);
+    $route->addRoute('POST', '/registration', [RegisterController::class, 'storeRegistrationForm']);
     $route->addRoute('GET', '/logIn', [LogInController::class, 'showLogInForm']);
 });
 

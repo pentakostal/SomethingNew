@@ -1,25 +1,21 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Services;
 
-use App\Template;
 use Finnhub\Api\DefaultApi;
 use Finnhub\Configuration;
 use GuzzleHttp\Client;
 
-class StockController
+class StockControllerService
 {
-    public function index()
+    public function execute()
     {
         $config = Configuration::getDefaultConfiguration()->setApiKey('token', $_ENV['API_KEY']);
         $client = new DefaultApi(
             new Client(),
             $config
         );
-        echo "<pre>";
 
-        print_r($client->quote("AAPL"));
-
-        //return new Template("stocks/index.twig");
+        print_r($client->filings($symbol = "AAPL", $from = "2020-01-01", $to = "2020-06-11"));
     }
 }

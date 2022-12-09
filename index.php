@@ -3,6 +3,8 @@
 use App\Controllers\HomeController;
 use App\Controllers\LogInController;
 use App\Controllers\RegisterController;
+use App\Controllers\StockController;
+use App\Redirect;
 
 require_once "vendor/autoload.php";
 
@@ -17,6 +19,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $rout
     $route->addRoute('POST', '/registration', [RegisterController::class, 'storeRegistrationForm']);
     $route->addRoute('GET', '/logIn', [LogInController::class, 'showLogInForm']);
     $route->addRoute('POST', '/logInSystem', [LogInController::class, 'logToSystem']);
+    $route->addRoute('GET', '/user', [StockController::class, 'index']);
     $route->addRoute('GET', '/logOut', [LogInController::class, 'logOut']);
 });
 
@@ -52,6 +55,10 @@ switch ($routeInfo[0]) {
 
         if ($response instanceof \App\Template) {
             echo $twig->render($response->getPath(), $response->getParams());
+        }
+
+        if ($response instanceof Redirect) {
+            header('Location: ' . $response->getUrl());
         }
 
         break;

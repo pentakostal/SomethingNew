@@ -2,13 +2,15 @@
 
 namespace App\Services;
 
+use App\Models\Collection\StockCollection;
+use App\Models\StockProfile;
 use Finnhub\Api\DefaultApi;
 use Finnhub\Configuration;
 use GuzzleHttp\Client;
 
 class StockControllerService
 {
-    public function execute()
+    public function execute(string $search)
     {
         $config = Configuration::getDefaultConfiguration()->setApiKey('token', $_ENV['API_KEY']);
         $client = new DefaultApi(
@@ -16,6 +18,20 @@ class StockControllerService
             $config
         );
 
-        print_r($client->filings($symbol = "AAPL", $from = "2020-01-01", $to = "2020-06-11"));
+        $companyInfo = $client->companyProfile2($search);
+        $stockPrice = $client->quote($search);
+
+        $stockCollection = new StockCollection();
+        $stockCollection->add(new StockProfile(
+            $companyInfo->getName(),
+            $companyInfo->getLogo(),
+            $search,
+            $stockPrice->getC(),
+            $stockPrice->getH(),
+            $stockPrice->getL(),
+            $stockPrice->getDp()
+        ));
+
+        return $stockCollection;
     }
 }

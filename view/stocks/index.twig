@@ -49,6 +49,13 @@
         </div>
     </nav>
 </header>
+<div>
+    {% for stock in stocks %}
+        <div class="item">
+            <p>{{ stock.getName }}</p>
+        </div>
+{% endfor %}
+</div>
 
 <!-- About -->
 <div id="about">

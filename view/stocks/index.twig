@@ -53,8 +53,14 @@
     {% for stock in stocks %}
         <div class="item">
             <p>{{ stock.getName }}</p>
+            <p>{{ stock.getLogo }}</p>
+            <p>{{ stock.getSymbol }}</p>
+            <p>{{ stock.getCurrentPrice }}</p>
+            <p>{{ stock.getHighPriceOfDay }}</p>
+            <p>{{ stock.getLowPriceOfDay }}</p>
+            <p>{{ stock.getPercentChange }}</p>
         </div>
-{% endfor %}
+    {% endfor %}
 </div>
 
 <!-- About -->

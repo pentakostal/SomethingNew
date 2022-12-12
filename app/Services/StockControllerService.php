@@ -10,28 +10,28 @@ use GuzzleHttp\Client;
 
 class StockControllerService
 {
-    public function execute(string $search)
+    public function execute(array $search): StockCollection
     {
         $config = Configuration::getDefaultConfiguration()->setApiKey('token', $_ENV['API_KEY']);
         $client = new DefaultApi(
             new Client(),
             $config
         );
-
-        $companyInfo = $client->companyProfile2($search);
-        $stockPrice = $client->quote($search);
-
         $stockCollection = new StockCollection();
-        $stockCollection->add(new StockProfile(
-            $companyInfo->getName(),
-            $companyInfo->getLogo(),
-            $search,
-            $stockPrice->getC(),
-            $stockPrice->getH(),
-            $stockPrice->getL(),
-            $stockPrice->getDp()
-        ));
+        foreach ($search as &$searched) {
+            $companyInfo = $client->companyProfile2($searched);
+            $stockPrice = $client->quote($searched);
 
+            $stockCollection->add(new StockProfile(
+                $companyInfo->getName(),
+                $companyInfo->getLogo(),
+                $searched,
+                $stockPrice->getC(),
+                $stockPrice->getH(),
+                $stockPrice->getL(),
+                $stockPrice->getDp()
+            ));
+        }
         return $stockCollection;
     }
 }

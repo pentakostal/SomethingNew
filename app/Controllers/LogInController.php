@@ -14,7 +14,7 @@ class LogInController
         return new Template('logIn/logIn.twig');
     }
 
-    public function logToSystem()
+    public function logToSystem(): Redirect
     {
         $logInService = new LogInService();
         if($logInService->execute(
@@ -31,6 +31,7 @@ class LogInController
 
     public function logOut(): Template
     {
+        session_destroy();
         return new Template('home/home.twig');
     }
 }

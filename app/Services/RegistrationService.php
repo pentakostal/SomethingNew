@@ -11,7 +11,7 @@ class RegistrationService
 {
     private $dbConnection;
 
-    public function execute(RegistrationServiceRequest $request)
+    public function execute(RegistrationServiceRequest $request): bool
     {
         $this->dbConnection = Database::getConnection();
         $newUser = $request;

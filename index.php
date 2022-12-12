@@ -2,9 +2,12 @@
 
 use App\Controllers\HomeController;
 use App\Controllers\LogInController;
+use App\Controllers\PersonalCabinetController;
 use App\Controllers\RegisterController;
 use App\Controllers\StockController;
 use App\Redirect;
+
+session_start();
 
 require_once "vendor/autoload.php";
 
@@ -20,7 +23,10 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $rout
     $route->addRoute('GET', '/logIn', [LogInController::class, 'showLogInForm']);
     $route->addRoute('POST', '/logInSystem', [LogInController::class, 'logToSystem']);
     $route->addRoute('GET', '/user', [StockController::class, 'index']);
+    $route->addRoute('GET', '/search', [StockController::class, 'search']);
     $route->addRoute('GET', '/logOut', [LogInController::class, 'logOut']);
+    $route->addRoute('GET', '/personalCabinet', [PersonalCabinetController::class, 'getWallet']);
+    $route->addRoute('POST', '/personalCabinet', [PersonalCabinetController::class, 'addMoney']);
 });
 
 $loader = new \Twig\Loader\FilesystemLoader('view');

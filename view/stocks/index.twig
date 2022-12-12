@@ -1,110 +1,87 @@
 <!DOCTYPE html>
-
-<html lang="en" class="no-js">
-
+<html>
 <head>
-    <meta charset="utf-8"/>
-    <title>FlameOnePage Free Template by FairTech</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta content="FlameOnePage freebie theme for web startups by FairTech SEO." name="description"/>
-    <meta content="FairTech" name="author"/>
-    <link href="https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet" type="text/css">
-    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href="../../public/vendors/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-    <link href="../../public/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="../../public/css/animate.css" rel="stylesheet">
-    <link href="../../public/vendors/swiper/css/swiper.min.css" rel="stylesheet" type="text/css"/>
-    <link href="../../public/css/layout.min.css" rel="stylesheet" type="text/css"/>
-    <link rel="shortcut icon" href="favicon.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        table, th, td {
+            border:1px solid black;
+        }
+    </style>
 </head>
+<body>
 
+<div class="topnav">
+    <a class="active" href="/user">Home</a>
+    <a href="/logOut">Log Out</a>
+    <a href="/personalCabinet">Personal cabinet</a>
 
-<body id="body" data-spy="scroll" data-target=".header">
-
-<header class="header navbar-fixed-top">
-    <nav class="navbar" role="navigation">
-        <div class="container">
-            <div class="menu-container js_nav-item">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="toggle-icon"></span>
-                </button>
-
-                <div class="logo">
-                    <a class="logo-wrap" href="#body">
-                        <img class="logo-img logo-img-main" src="../../public/img/logo.png" alt="FlameOnePage Logo">
-                        <img class="logo-img logo-img-active" src="../../public/img/logo-dark.png" alt="FlameOnePage Dark Logo">
-                    </a>
-                </div>
-            </div>
-
-            <div class="collapse navbar-collapse nav-collapse">
-                <div class="menu-container">
-                    <ul class="nav navbar-nav navbar-nav-right">
-                        <li class="js_nav-item nav-item"><a href="/logOut">LogOut</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
-<div>
-    {% for stock in stocks %}
-        <div class="item">
-            <p>{{ stock.getName }}</p>
-            <p>{{ stock.getLogo }}</p>
-            <p>{{ stock.getSymbol }}</p>
-            <p>{{ stock.getCurrentPrice }}</p>
-            <p>{{ stock.getHighPriceOfDay }}</p>
-            <p>{{ stock.getLowPriceOfDay }}</p>
-            <p>{{ stock.getPercentChange }}</p>
-        </div>
-    {% endfor %}
 </div>
 
-<!-- About -->
-<div id="about">
-
-
-    <div class="bg-color-sky-light">
-        <div class="content-lg container">
-            <div class="row">
-                <div class="col-md-5 col-sm-5 md-margin-b-60">
-                    <div class="margin-t-50 margin-b-30">
-                        <p>Info About Stocks</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div style="padding-left:16px">
+    <h2>Serch stocks by SYMBOL</h2>
+    <form class="center" action="/search">
+        <br><label>Search</label>
+        <br>
+        <input type="text" id="search" name="search">
+        <input type="submit" value="Ok">
+    </form>
+    <br>
+    <br>
+    <br>
+    <table style="width:100%">
+        <tr>
+            <th>Logo</th>
+            <th>Company</th>
+            <th>Symbol</th>
+            <th>Current price</th>
+            <th>High price of the day</th>
+            <th>Low price of the day</th>
+            <th>Percent change</th>
+        </tr>
+        <tr>
+            {% for stock in stocks %}
+                <tr>
+                    <td><img src="{{ stock.getLogo }}" alt="Logo"></td>
+                    <td><p>{{ stock.getName }}</p></td>
+                    <td><p>{{ stock.getSymbol }}</p></td>
+                    <td><p>{{ stock.getCurrentPrice }}</p></td>
+                    <td><p>{{ stock.getHighPriceOfDay }}</p></td>
+                    <td><p>{{ stock.getLowPriceOfDay }}</p></td>
+                    <td><p>{{ stock.getPercentChange }}</p></td>
+                </tr>
+            {% endfor %}
+        </tr>
+    </table>
 </div>
-
-
-<!-- Back To Top -->
-<a href="javascript:void(0);" class="js-back-to-top back-to-top">Top</a>
-
-<!-- JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-<!-- CORE PLUGINS -->
-<script src="../../public/vendors/jquery.min.js" type="text/javascript"></script>
-<script src="../../public/vendors/jquery-migrate.min.js" type="text/javascript"></script>
-<script src="../../public/vendors/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-
-<!-- PAGE LEVEL PLUGINS -->
-<script src="../../public/vendors/jquery.easing.js" type="text/javascript"></script>
-<script src="../../public/vendors/jquery.back-to-top.js" type="text/javascript"></script>
-<script src="../../public/vendors/jquery.smooth-scroll.js" type="text/javascript"></script>
-<script src="../../public/vendors/jquery.wow.min.js" type="text/javascript"></script>
-<script src="../../public/vendors/swiper/js/swiper.jquery.min.js" type="text/javascript"></script>
-<script src="../../public/vendors/masonry/jquery.masonry.pkgd.min.js" type="text/javascript"></script>
-<script src="../../public/vendors/masonry/imagesloaded.pkgd.min.js" type="text/javascript"></script>
-
-<!-- PAGE LEVEL SCRIPTS -->
-<script src="../../public/js/layout.min.js" type="text/javascript"></script>
-<script src="../../public/js/components/wow.min.js" type="text/javascript"></script>
-<script src="../../public/js/components/swiper.min.js" type="text/javascript"></script>
-<script src="../../public/js/components/masonry.min.js" type="text/javascript"></script>
 
 </body>
-<!-- END BODY -->
 </html>

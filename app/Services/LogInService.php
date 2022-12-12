@@ -25,7 +25,7 @@ class LogInService
                 $resultSet = $stmt->executeQuery();
                 $id = $resultSet->fetchAllAssociative();
 
-                //$_SESSION["userId"]=$id[0]['id'];
+                $_SESSION["userId"]=$id[0]['id'];
 
                 return true;
             }

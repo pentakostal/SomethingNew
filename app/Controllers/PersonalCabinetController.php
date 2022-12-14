@@ -8,13 +8,6 @@ use App\Template;
 
 class PersonalCabinetController
 {
-    public function search(): Template
-    {
-        return new Template(
-            'personalCabinet/cabinet.twig',
-        );
-    }
-
     public function getWallet(): Template
     {
         $amount = (new PersonalCabinetService())->getWallet();

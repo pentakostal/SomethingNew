@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
+use App\Database;
 use App\Models\StockProfile;
 use App\Repository\WalletAmount;
+use Doctrine\DBAL\Exception;
 use Finnhub\Api\DefaultApi;
+use Finnhub\ApiException;
 use Finnhub\Configuration;
 use GuzzleHttp\Client;
 
@@ -39,6 +42,20 @@ class BuyStockService
         $moneyInWallet = WalletAmount::getMoney();
 
         if ($moneyInWallet >= $purchasePrice * $request->getAmount()) {
+            $dbConnection = Database::getConnection();
+
+            $dbConnection->insert("buy_history", [
+                "user_id" => $_SESSION["userId"],
+                "amount" => $request->getAmount(),
+                "purchased_price" => $purchasePrice,
+                "symbol" => $symbol,
+                "company_name" => $companyName
+            ]);
+
+            $wallet = (new \App\Repository\WalletAmount)->getMoney();
+            $newAmount = $wallet - ($purchasePrice * $request->getAmount());
+            $dbConnection->update("users", ["wallet" => $newAmount], ["id" => $_SESSION["userId"]]);
+
             return true;
         }
 

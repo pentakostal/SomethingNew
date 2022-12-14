@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\BuyStockController;
 use App\Controllers\HomeController;
 use App\Controllers\LogInController;
 use App\Controllers\PersonalCabinetController;
@@ -27,6 +28,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $rout
     $route->addRoute('GET', '/logOut', [LogInController::class, 'logOut']);
     $route->addRoute('GET', '/personalCabinet', [PersonalCabinetController::class, 'getWallet']);
     $route->addRoute('POST', '/personalCabinet', [PersonalCabinetController::class, 'addMoney']);
+    $route->addRoute('POST', '/user', [BuyStockController::class, 'buyStock']);
 });
 
 $loader = new \Twig\Loader\FilesystemLoader('view');

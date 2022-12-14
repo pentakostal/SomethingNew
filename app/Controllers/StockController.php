@@ -12,7 +12,7 @@ class StockController
         $search = ["ATVI", "EA", "RBLX", "TTWO", "ZNGA", "SCPL", "CCOEF", "MYPS", "SKLZ", "DICE"];
 
         $stock = (new StockControllerService())->execute($search);
-        var_dump($_SESSION["userId"]);
+        //var_dump($_SESSION["userId"]);
         return new Template(
             'stocks/index.twig',
             [

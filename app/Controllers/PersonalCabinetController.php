@@ -12,8 +12,7 @@ class PersonalCabinetController
     public function getPersonalCabinet(): Template
     {
         $amount = new PersonalCabinetService();
-        //echo"<pre>";
-        //var_dump($amount->getWallet());die;
+
         return new Template(
             'personalCabinet/cabinet.twig',
             [

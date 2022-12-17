@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Database;
 use App\Models\StockProfile;
+use App\Repository\StockBankCheck;
 use App\Repository\WalletAmount;
 use Carbon\Carbon;
 use Doctrine\DBAL\Exception;
@@ -46,7 +47,7 @@ class BuyStockService
             $dbConnection = Database::getConnection();
 
             $dbConnection->insert("buy_history", [
-                "user_id" => $_SESSION["userId"],
+                "user_id" => $id,
                 "amount" => $request->getAmount(),
                 "price" => $purchasePrice,
                 "symbol" => $symbol,
@@ -55,9 +56,28 @@ class BuyStockService
                 "date" => Carbon::now()->toDateTimeString()
             ]);
 
+            $userStockBank = new StockBankCheck($id, $symbol);
+            var_dump($request->getAmount());
+            if ($userStockBank->checkBank()==0) {
+                $dbConnection->insert('stock_bank', [
+                    "user_id" => (int) $id,
+                    "symbol" => $symbol,
+                    "amount" => $request->getAmount()
+                ]);
+            } else {
+                $oldStockAmount = $userStockBank->checkBank();
+                $newStockAmount = $request->getAmount() + $oldStockAmount;
+                var_dump($newStockAmount);
+                $dbConnection->update('stock_bank',
+                    ["amount" => $newStockAmount],
+                    ["user_id" => $id],
+                    ["symbol" => $symbol]
+                );
+            }
+
             $wallet = (new \App\Repository\WalletAmount)->getMoney();
             $newAmount = $wallet - ($purchasePrice * $request->getAmount());
-            $dbConnection->update("users", ["wallet" => $newAmount], ["id" => $_SESSION["userId"]]);
+            $dbConnection->update("users", ["wallet" => $newAmount], ["id" => $id]);
 
             return true;
         }

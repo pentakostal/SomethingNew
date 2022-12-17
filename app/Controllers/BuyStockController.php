@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 
+use App\Database;
 use App\Services\BuyStockRequest;
 use App\Services\BuyStockService;
 

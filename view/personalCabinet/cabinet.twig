@@ -55,9 +55,31 @@
         <input type="submit" value="Add">
     </form>
     <br>
-    <br>
-    <br>
     <p>Your wallet is: {{ amount }}</p>
+    <br>
+    <h2>Transaction history</h2>
+    <table style="width:100%">
+        <tr>
+            <th>Transaction ID</th>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>Symbol</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+        <tr>
+            {% for record in records %}
+        <tr>
+            <td><p>{{ record.getBuyId }}</p></td>
+            <td><p>{{ record.getAmount }}</p></td>
+            <td><p>{{ record.getPrice }}</p></td>
+            <td><p>{{ record.getSymbol }}</p></td>
+            <td><p>{{ record.getStatus }}</p></td>
+            <td><p>{{ record.getDate }}</p></td>
+        </tr>
+        {% endfor %}
+        </tr>
+    </table>
 </div>
 
 </body>

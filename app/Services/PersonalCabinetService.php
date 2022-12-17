@@ -2,17 +2,24 @@
 
 namespace App\Services;
 
-use App\Database;
+use App\Models\Collection\UserTransaction;
 use App\Models\Wallet;
 use App\Repository\WalletAmount;
 
 class PersonalCabinetService
 {
-    public function getWallet(): Wallet
+    public function getWallet(): float
     {
-        $money = (new \App\Repository\WalletAmount)->getMoney();
-        $wallet = new Wallet($money);
+        $money = (new WalletAmount)->getMoney();
 
-        return $wallet;
+        return $money;
+    }
+
+    public function getTransactionRecord(): array
+    {
+        $transactionCollection = new UserTransaction();
+        //echo "<pre>";
+        //var_dump($transactionCollection->getRecordSet());
+        return $transactionCollection->getRecordSet();
     }
 }

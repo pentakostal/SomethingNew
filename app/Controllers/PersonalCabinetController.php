@@ -3,19 +3,22 @@
 namespace App\Controllers;
 
 use App\Database;
+use App\Models\Collection\UserTransaction;
 use App\Services\PersonalCabinetService;
 use App\Template;
 
 class PersonalCabinetController
 {
-    public function getWallet(): Template
+    public function getPersonalCabinet(): Template
     {
-        $amount = (new PersonalCabinetService())->getWallet();
-
+        $amount = new PersonalCabinetService();
+        //echo"<pre>";
+        //var_dump($amount->getWallet());die;
         return new Template(
             'personalCabinet/cabinet.twig',
             [
-                'amount' => $amount->getAmount()
+                'amount' => $amount->getWallet(),
+                'records' => $amount->getTransactionRecord()
             ]
         );
     }
@@ -25,12 +28,12 @@ class PersonalCabinetController
         $addAmount = (float) $_POST["addMoney"];
         $amount = (new PersonalCabinetService())->getWallet();
 
-        $newAmount = $addAmount + $amount->getAmount();
+        $newAmount = $addAmount + $amount;
 
         $this->dbConnection = Database::getConnection();
 
         $this->dbConnection->update("users", ["wallet" => $newAmount], ["id" => $_SESSION["userId"]]);
 
-        return $this->getWallet();
+        return $this->getPersonalCabinet();
     }
 }

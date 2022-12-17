@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Database;
 use App\Models\StockProfile;
 use App\Repository\WalletAmount;
+use Carbon\Carbon;
 use Doctrine\DBAL\Exception;
 use Finnhub\Api\DefaultApi;
 use Finnhub\ApiException;
@@ -47,9 +48,11 @@ class BuyStockService
             $dbConnection->insert("buy_history", [
                 "user_id" => $_SESSION["userId"],
                 "amount" => $request->getAmount(),
-                "purchased_price" => $purchasePrice,
+                "price" => $purchasePrice,
                 "symbol" => $symbol,
-                "company_name" => $companyName
+                "company_name" => $companyName,
+                "status" => "buy",
+                "date" => Carbon::now()->toDateTimeString()
             ]);
 
             $wallet = (new \App\Repository\WalletAmount)->getMoney();

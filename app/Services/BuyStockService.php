@@ -57,7 +57,6 @@ class BuyStockService
             ]);
 
             $userStockBank = new StockBankCheck($id, $symbol);
-            var_dump($request->getAmount());
             if ($userStockBank->checkBank()==0) {
                 $dbConnection->insert('stock_bank', [
                     "user_id" => (int) $id,

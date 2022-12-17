@@ -17,7 +17,8 @@ class PersonalCabinetController
             'personalCabinet/cabinet.twig',
             [
                 'amount' => $amount->getWallet(),
-                'records' => $amount->getTransactionRecord()
+                'records' => $amount->getTransactionRecord(),
+                'stockBank' => $amount->getUserStockBankCollection()
             ]
         );
     }

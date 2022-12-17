@@ -7,6 +7,7 @@ use App\Controllers\PersonalCabinetController;
 use App\Controllers\RegisterController;
 use App\Controllers\SellStockController;
 use App\Controllers\StockController;
+use App\Controllers\TransferController;
 use App\Redirect;
 
 session_start();
@@ -31,6 +32,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $rout
     $route->addRoute('POST', '/personalCabinet', [PersonalCabinetController::class, 'addMoney']);
     $route->addRoute('POST', '/sell', [SellStockController::class, 'sellStock']);
     $route->addRoute('POST', '/user', [BuyStockController::class, 'buyStock']);
+    $route->addRoute('POST', '/transfer', [TransferController::class, 'transferStock']);
 });
 
 $loader = new \Twig\Loader\FilesystemLoader('view');

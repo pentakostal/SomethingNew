@@ -50,9 +50,6 @@ class SellStockService
         $resultSet = $stmt->executeQuery();
         $user = $resultSet->fetchAllAssociative();
 
-        echo "<pre>";
-        var_dump($user);
-
         if ($user != null) {
             $newStockAmount = (int) $user[0]['amount'] - $amount;
             if ($newStockAmount > 0) {
@@ -76,7 +73,7 @@ class SellStockService
             ]);
 
             $wallet = (new \App\Repository\WalletAmount)->getMoney();
-            $newAmount = $wallet - ($sellPrice * $request->getAmount());
+            $newAmount = $wallet + ($sellPrice * $request->getAmount());
             $dbConnection->update("users", ["wallet" => $newAmount], ["id" => $id]);
 
             return true;

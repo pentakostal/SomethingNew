@@ -106,6 +106,28 @@
         {% endfor %}
         </tr>
     </table>
+    <br>
+    <h2>Transfer stock</h2>
+    <form class="center" method="post" action="/transfer">
+        <br><label>Stock to transfer (Symbol)</label>
+        <br>
+        <input type="text" id="transferStock" name="transferStock">
+        <br><label>Amount of stock to transfer</label>
+        <br>
+        <input type="text" id="transferStockAmount" name="transferStockAmount">
+        <br><label>User to transfer</label>
+        <br>
+        <input type="text" id="transferUser" name="transferUser">
+        <br><label>Password</label>
+        <br>
+        <input type="password" name="password" id="password" required>
+        <br>
+        <br>
+        <br><input type="submit" value="TRANSFER">
+        <br>
+        <br>
+        <br>
+    </form>
 </div>
 
 </body>

@@ -55,20 +55,20 @@
         <input type="submit" value="Add">
     </form>
     <br>
-    <form class="center" method="post">
+    <form class="center" method="post" action="/sell">
         <br><label>Stock to Sell</label>
         <br>
         <input type="text" id="sellStock" name="sellStock">
         <br><label>Amount of stock to sell</label>
         <br>
-        <input type="text" id="sellStock" name="sellStock">
+        <input type="text" id="sellStockAmount" name="sellStockAmount">
         <input type="submit" value="SELL">
     </form>
     <br>
     <p>Your wallet is: {{ amount }}</p>
     <br>
     <h2>Transaction history</h2>
-    <table style="width:100%">
+    <table style="width:90%">
         <tr>
             <th>Transaction ID</th>
             <th>Amount</th>
@@ -92,7 +92,7 @@
     </table>
 
     <h2>Stock Bank</h2>
-    <table style="width:100%">
+    <table style="width:50%">
         <tr>
             <th>Symbol</th>
             <th>Amount</th>

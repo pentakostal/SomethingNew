@@ -5,6 +5,7 @@ use App\Controllers\HomeController;
 use App\Controllers\LogInController;
 use App\Controllers\PersonalCabinetController;
 use App\Controllers\RegisterController;
+use App\Controllers\SellStockController;
 use App\Controllers\StockController;
 use App\Redirect;
 
@@ -28,6 +29,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $rout
     $route->addRoute('GET', '/logOut', [LogInController::class, 'logOut']);
     $route->addRoute('GET', '/personalCabinet', [PersonalCabinetController::class, 'getPersonalCabinet']);
     $route->addRoute('POST', '/personalCabinet', [PersonalCabinetController::class, 'addMoney']);
+    $route->addRoute('POST', '/sell', [SellStockController::class, 'sellStock']);
     $route->addRoute('POST', '/user', [BuyStockController::class, 'buyStock']);
 });
 

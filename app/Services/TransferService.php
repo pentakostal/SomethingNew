@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Database;
+use Carbon\Carbon;
 
 class TransferService
 {
@@ -64,6 +65,7 @@ class TransferService
                     ["user_id" => $userTransfer[0]['id'],
                     "symbol" => $symbol]
                 );
+
 
                 return true;
             }

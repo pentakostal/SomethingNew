@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class TransactionHistoryRecord
 {
-    public function write(string $id, int $amount, float $price, string $symbol, string $companyName, string $status):void
+    public function write(int $id, int $amount, float $price, string $symbol, string $companyName, string $status):void
     {
         $dbConnection = Database::getConnection();
 

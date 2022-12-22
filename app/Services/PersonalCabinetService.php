@@ -5,13 +5,13 @@ namespace App\Services;
 use App\Models\Collection\UserBankCollection;
 use App\Models\Collection\UserTransaction;
 use App\Models\Wallet;
-use App\Repository\WalletAmount;
+use App\Repository\WalletActions;
 
 class PersonalCabinetService
 {
     public function getWallet(): float
     {
-        $money = (new WalletAmount)->getMoney();
+        $money = (new WalletActions)->getMoney();
 
         return $money;
     }

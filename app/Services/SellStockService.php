@@ -6,7 +6,7 @@ use App\Database;
 use App\Models\StockProfile;
 use App\Repository\StockPriceNow;
 use App\Repository\TransactionHistoryRecord;
-use App\Repository\WalletAmount;
+use App\Repository\WalletActions;
 use Carbon\Carbon;
 use Finnhub\Api\DefaultApi;
 use Finnhub\Configuration;
@@ -53,9 +53,8 @@ class SellStockService
                 "sell"
             );
 
-            $wallet = (new \App\Repository\WalletAmount)->getMoney();
-            $newAmount = $wallet + ($sellPrice * $request->getAmount());
-            $dbConnection->update("users", ["wallet" => $newAmount], ["id" => $id]);
+            $moneyAmount = (new WalletActions())->sell($stock->getCurrentPrice(), $request->getAmount());
+            (new WalletActions())->update($moneyAmount, $id);
 
             return true;
         }

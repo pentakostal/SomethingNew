@@ -3,17 +3,10 @@
 namespace App\Services;
 
 use App\Database;
-use App\Models\StockProfile;
 use App\Repository\StockBankCheck;
 use App\Repository\StockPriceNow;
 use App\Repository\TransactionHistoryRecord;
-use App\Repository\WalletAmount;
-use Carbon\Carbon;
-use Doctrine\DBAL\Exception;
-use Finnhub\Api\DefaultApi;
-use Finnhub\ApiException;
-use Finnhub\Configuration;
-use GuzzleHttp\Client;
+use App\Repository\WalletActions;
 
 class BuyStockService
 {
@@ -22,11 +15,11 @@ class BuyStockService
 
         $stock = (new StockPriceNow())->execute($request->getSymbol());
 
-        $id = $_SESSION["userId"];
+        $id = (int) $_SESSION["userId"];
         $symbol = $stock->getSymbol();
         $purchasePrice = $stock->getCurrentPrice();
 
-        $moneyInWallet = WalletAmount::getMoney();
+        $moneyInWallet = (new WalletActions)->getMoney();
 
         if ($moneyInWallet >= $purchasePrice * $request->getAmount()) {
             (new TransactionHistoryRecord())->write(
@@ -43,7 +36,7 @@ class BuyStockService
             $userStockBank = new StockBankCheck($id, $symbol);
             if ($userStockBank->checkBank()==0) {
                 $dbConnection->insert('stock_bank', [
-                    "user_id" => (int) $id,
+                    "user_id" => $id,
                     "symbol" => $symbol,
                     "amount" => $request->getAmount()
                 ]);
@@ -58,9 +51,8 @@ class BuyStockService
                 );
             }
 
-            $wallet = (new \App\Repository\WalletAmount)->getMoney();
-            $newAmount = $wallet - ($purchasePrice * $request->getAmount());
-            $dbConnection->update("users", ["wallet" => $newAmount], ["id" => $id]);
+            $moneyAmount = (new WalletActions())->buy($stock->getCurrentPrice(), $request->getAmount());
+            (new WalletActions())->update($moneyAmount, $id);
 
             return true;
         }

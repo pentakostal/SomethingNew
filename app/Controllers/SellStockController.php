@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Services\SellStockRequest;
+use App\Services\BuySellStockRequest;
 use App\Services\SellStockService;
 
 class SellStockController
@@ -11,7 +11,7 @@ class SellStockController
     {
         $sellStock = new SellStockService();
         if($sellStock->execute(
-            new SellStockRequest(
+            new BuySellStockRequest(
                 $_POST["sellStock"],
                 $_POST["sellStockAmount"]
             )

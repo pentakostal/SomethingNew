@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class BuyStockRequest
+class BuySellStockRequest
 {
     private string $symbol;
     private int $amount;

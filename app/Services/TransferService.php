@@ -66,7 +66,6 @@ class TransferService
                     "symbol" => $symbol]
                 );
 
-
                 return true;
             }
         }

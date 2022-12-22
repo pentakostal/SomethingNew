@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 
 use App\Database;
-use App\Services\BuyStockRequest;
+use App\Services\BuySellStockRequest;
 use App\Services\BuyStockService;
 
 class BuyStockController
@@ -13,7 +13,7 @@ class BuyStockController
     {
         $buyStock = new BuyStockService();
         if($buyStock->execute(
-            new BuyStockRequest(
+            new BuySellStockRequest(
                 $_POST["buyStock"],
                 $_POST["buyStockAmount"]
             )

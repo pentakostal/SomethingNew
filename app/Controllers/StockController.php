@@ -16,7 +16,8 @@ class StockController
         return new Template(
             'stocks/index.twig',
             [
-                'stocks' => $stock->get()
+                'stocks' => $stock->get(),
+                'status' => ""
             ]
         );
     }

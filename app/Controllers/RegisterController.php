@@ -13,7 +13,7 @@ class RegisterController
         return new Template('register/register.twig');
     }
 
-    public function storeRegistrationForm()
+    public function storeRegistrationForm(): Template
     {
         $registerService = new RegistrationService();
         if($registerService->execute(
@@ -24,9 +24,17 @@ class RegisterController
                 $_POST["psw-repeat"]
             )
         )){
-            var_dump("registration OK");
-        } else {
-            var_dump("registration FAILED");
+            return new Template('register/register.twig',
+            [
+                'status' => 'registration ok'
+            ]
+            );
         }
+
+        return new Template('register/register.twig',
+            [
+                'status' => 'registration failed'
+            ]
+        );
     }
 }

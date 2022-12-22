@@ -25,8 +25,8 @@ class LogInController
         )){
             return new Redirect('/user');
         }
-        var_dump("log NOT successful");
 
+        return new Redirect('/logIn');
     }
 
     public function logOut(): Template

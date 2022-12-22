@@ -47,6 +47,7 @@
 </div>
 
 <div style="padding-left:16px">
+    <p>{{ status }}</p>
     <h2>Serch stocks by SYMBOL</h2>
     <form class="center" action="/search">
         <br><label>Search</label>
@@ -56,7 +57,7 @@
     </form>
     <br>
     <h2>Buy stocks by SYMBOL</h2>
-    <form class="center" method="post">
+    <form class="center" method="post" >
         <br><label>Stock to buy</label>
         <br>
         <input type="text" id="buyStock" name="buyStock">

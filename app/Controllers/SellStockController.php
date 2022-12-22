@@ -3,22 +3,41 @@
 namespace App\Controllers;
 
 use App\Services\BuySellStockRequest;
+use App\Services\PersonalCabinetService;
 use App\Services\SellStockService;
+use App\Template;
 
 class SellStockController
 {
-    public function sellStock()
+    public function sellStock(): Template
     {
         $sellStock = new SellStockService();
+
+        $amount = new PersonalCabinetService();
+
         if($sellStock->execute(
             new BuySellStockRequest(
                 $_POST["sellStock"],
                 $_POST["sellStockAmount"]
             )
         )){
-            var_dump("sell ok");
-        } else {
-            var_dump("sell failed");
-        }
+            return new Template(
+                'personalCabinet/cabinet.twig',
+                [
+                    'amount' => $amount->getWallet(),
+                    'records' => $amount->getTransactionRecord(),
+                    'stockBank' => $amount->getUserStockBankCollection(),
+                    'status' => 'sell ok'
+                ]
+            );
+        } return new Template(
+        'personalCabinet/cabinet.twig',
+        [
+            'amount' => $amount->getWallet(),
+            'records' => $amount->getTransactionRecord(),
+            'stockBank' => $amount->getUserStockBankCollection(),
+            'status' => 'sell ffailed'
+        ]
+    );
     }
 }

@@ -3,11 +3,11 @@
 namespace App\Services;
 
 use App\Database;
-use Carbon\Carbon;
+use App\Repository\TransactionHistoryRecord;
 
 class TransferService
 {
-    public function execute(TransferRequest $request):  bool
+    public function execute(TransferRequest $request): bool
     {
         $dbConnection = Database::getConnection();
         $id = $_SESSION["userId"];
@@ -64,6 +64,15 @@ class TransferService
                     ["amount" => $newStockAmount],
                     ["user_id" => $userTransfer[0]['id'],
                     "symbol" => $symbol]
+                );
+
+                (new TransactionHistoryRecord())->write(
+                    $id,
+                    $user->getAmount(),
+                    0,
+                    $user->getSymbol(),
+                    "--",
+                    "transfer"
                 );
 
                 return true;

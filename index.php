@@ -27,9 +27,10 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $rout
     $route->addRoute('POST', '/logInSystem', [LogInController::class, 'logToSystem']);
     $route->addRoute('GET', '/user', [StockController::class, 'index']);
     $route->addRoute('GET', '/search', [StockController::class, 'search']);
+    $route->addRoute('POST', '/search', [BuyStockController::class, 'buyStock']);
     $route->addRoute('GET', '/logOut', [LogInController::class, 'logOut']);
     $route->addRoute('GET', '/personalCabinet', [PersonalCabinetController::class, 'getPersonalCabinet']);
-    $route->addRoute('POST', '/personalCabinet', [PersonalCabinetController::class, 'addMoney']);
+    $route->addRoute('POST', '/addMoney', [PersonalCabinetController::class, 'addMoney']);
     $route->addRoute('POST', '/sell', [SellStockController::class, 'sellStock']);
     $route->addRoute('POST', '/user', [BuyStockController::class, 'buyStock']);
     $route->addRoute('POST', '/transfer', [TransferController::class, 'transferStock']);

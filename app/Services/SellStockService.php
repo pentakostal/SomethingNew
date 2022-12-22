@@ -34,7 +34,7 @@ class SellStockService
                     ["user_id" => $id,
                     "symbol" => $symbol]
                 );
-            } else {
+            } elseif($newStockAmount == 0) {
                 $dbConnection->delete('stock_bank', ['symbol' => $symbol, 'user_id' => $id]);
             }
 

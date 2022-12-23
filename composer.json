@@ -12,6 +12,7 @@
         "vlucas/phpdotenv": "^5.5",
         "doctrine/dbal": "^3.5",
         "finnhub/client": "^1.1",
-        "nesbot/carbon": "^2.64"
+        "nesbot/carbon": "^2.64",
+        "php-di/php-di": "^6.4"
     }
 }

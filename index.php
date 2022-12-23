@@ -6,6 +6,7 @@ use App\Controllers\LogInController;
 use App\Controllers\PersonalCabinetController;
 use App\Controllers\RegisterController;
 use App\Controllers\SellStockController;
+use App\Controllers\shortStockController;
 use App\Controllers\StockController;
 use App\Controllers\TransferController;
 use App\Redirect;
@@ -34,6 +35,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $rout
     $route->addRoute('POST', '/sell', [SellStockController::class, 'sellStock']);
     $route->addRoute('POST', '/user', [BuyStockController::class, 'buyStock']);
     $route->addRoute('POST', '/transfer', [TransferController::class, 'transferStock']);
+    $route->addRoute('GET', '/shortStocks', [shortStockController::class, 'index']);
+    $route->addRoute('POST', '/sellShort', [shortStockController::class, 'shortSell']);
 });
 
 $loader = new \Twig\Loader\FilesystemLoader('view');

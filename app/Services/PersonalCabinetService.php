@@ -19,8 +19,7 @@ class PersonalCabinetService
     public function getTransactionRecord(): array
     {
         $transactionCollection = new UserTransaction();
-        //echo "<pre>";
-        //var_dump($transactionCollection->getRecordSet());
+
         return $transactionCollection->getRecordSet();
     }
 

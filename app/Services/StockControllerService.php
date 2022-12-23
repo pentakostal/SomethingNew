@@ -32,6 +32,7 @@ class StockControllerService
                 $stockPrice->getDp()
             ));
         }
+
         return $stockCollection;
     }
 }

@@ -49,6 +49,7 @@
 <div style="padding-left:16px">
     <p>{{ status }}</p>
     <h2>Short transactions</h2>
+    <p>{{ profit }}</p>
     <br><h3>Short Sell</h3>
     <form class="center" method="post" action="/sellShort">
         <br><label>Stock to Short Sell</label>
@@ -66,10 +67,7 @@
         <br><label>Transaction ID</label>
         <br>
         <input type="text" id="transactionId" name="transactionId">
-        <br><label>Stock to Short Buy</label>
-        <br>
-        <input type="text" id="buyStockShort" name="buyStockShort">
-        <br><label>Amount of stock to sell</label>
+        <br><label>Amount of stock to buy short</label>
         <br>
         <input type="text" id="buyStockAmountShort" name="buyStockAmountShort">
         <br>

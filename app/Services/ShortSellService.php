@@ -3,11 +3,10 @@
 namespace App\Services;
 
 use App\Database;
-use App\Models\Collection\UserBankShortCollection;
 use App\Repository\StockPriceNow;
 use App\Repository\TransactionHistoryRecord;
 
-class shortSellService
+class ShortSellService
 {
     public function execute(BuySellStockRequest $request)
     {

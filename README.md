@@ -14,6 +14,10 @@ Also, possibility to transfer stock to another user.</p>
     <li>Transfer stocks to another user</li>
 </ol>
 
+![](https://github.com/pentakostal/SomethingNew/blob/main/public/gif/Peek%202022-12-26%2009-19.gif)
+![](https://github.com/pentakostal/SomethingNew/blob/main/public/gif/Peek%202022-12-26%2009-191.gif)
+![](https://github.com/pentakostal/SomethingNew/blob/main/public/gif/Peek%202022-12-26%2009-20.gif)
+
 ### Components used:
 <ol>
 <li>PHP 7.4</li>

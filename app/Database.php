@@ -18,7 +18,7 @@ class Database
                 'user' => $_ENV['DB_USER'],
                 'password' => $_ENV['DB_PASSWORD'],
                 'host' => $_ENV['DB_HOST'],
-                'driver' => $_ENV['DB_DRIVER'],
+                'driver' => "pdo_mysql",
             ];
             self::$connection = DriverManager::getConnection($connectionParams);
         }

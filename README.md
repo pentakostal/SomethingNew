@@ -38,6 +38,11 @@ get your API key): </li>
 
 > composer install
 
+<li>shema.sql contains database schema, to import it you can use command 
+(ore other method which you prefer):</li>
+
+> mysql -u username -p stocks_api < shema.sql
+
 <li>Create a .env file
     <ol>
         <li>Take .env.example file and rename it in .env.</li>
